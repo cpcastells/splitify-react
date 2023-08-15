@@ -1,5 +1,12 @@
 @import "@fontsource/jost";
 
 @tailwind base;
+
+@layer base {
+  img {
+    height: min-content;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;

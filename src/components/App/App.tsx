@@ -12,7 +12,7 @@ const App = (): React.ReactElement => {
         alt="Splitify logo"
         className="m-auto"
       />
-      <div className="h-screen bg-gradient-to-b from-white to-orange-200 flex flex-col justify-start items-center px-5 pb-9">
+      <div className="h-screen bg-gradient-to-b from-white to-orange-200 flex flex-col justify-start items-center gap-5 px-5 pb-9">
         <Operation />
       </div>
     </>
