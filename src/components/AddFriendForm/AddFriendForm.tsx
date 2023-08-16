@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import closeIcon from "../../../public/images/icons/close-icon.svg";
-
 interface AddFriendForm {
   onAddFriendForm: (value: boolean) => void;
 }
@@ -8,8 +7,31 @@ interface AddFriendForm {
 const AddFriendForm = ({
   onAddFriendForm,
 }: AddFriendForm): React.ReactElement => {
+  const initialFriend = {
+    image: "",
+    name: "",
+    balance: 0,
+  };
+
+  const [newFriend, setNewFriend] = useState(initialFriend);
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewFriend({ ...newFriend, [event.target.id]: event.target.value });
+  };
+
+  const handleOnSubmit = (event: React.ChangeEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+
+    setNewFriend(initialFriend);
+  };
+
+  const isDisabled = !newFriend.image || !newFriend.name;
+
   return (
-    <form className="relative w-full p-[14px] bg-[#ffffffbe] rounded-[10px]">
+    <form
+      className="relative w-full p-[14px] bg-[#ffffffbe] rounded-[10px]"
+      onSubmit={handleOnSubmit}
+    >
       <div className="flex flex-col gap-[25px]">
         <button onClick={() => onAddFriendForm(false)}>
           <img
@@ -24,28 +46,35 @@ const AddFriendForm = ({
           className={`w-[146px] h-[146px] bg-[#fbE3c7] self-center rounded-full 
           bg-[url("../../../public/images/icons/who-icon.svg")] bg-no-repeat bg-center bg-fit `}
         ></div>
-        <div className="flex justify-between items-center font-bold">
-          <label htmlFor="name">Friend name:</label>
+        <div className="flex justify-between items-center">
+          <label htmlFor="name" className="font-bold">
+            Friend name:
+          </label>
           <input
             id="name"
             type="text"
-            className="w-[190px] h-12 bg-[#fbE3c7] rounded-[10px]"
+            value={newFriend.name}
+            onChange={handleOnChange}
+            className="w-[190px] h-12 bg-[#fbE3c7] rounded-[10px] px-3"
           />
         </div>
-        <div className="flex justify-between items-center font-bold">
-          <label
-            htmlFor="image"
-            className="flex justify-between items-center font-bold"
-          >
+        <div className="flex justify-between items-center">
+          <label htmlFor="image" className="font-bold">
             Image URL:
           </label>
           <input
             id="image"
             type="text"
-            className="w-[190px] h-12 bg-[#fbE3c7] rounded-[10px]"
+            value={newFriend.image}
+            onChange={handleOnChange}
+            className="w-[190px] h-12 bg-[#fbE3c7] rounded-[10px] px-3"
           />
         </div>
-        <button className="flex items-center  justify-center gap-3 w-full h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a] font-bold text-white rounded-[10px] shadow-md capitalize">
+        <button
+          disabled={isDisabled}
+          className="flex items-center  justify-center gap-3 w-full h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a] 
+          font-bold text-white rounded-[10px] shadow-md capitalize disabled:bg-[#fcc990]"
+        >
           add
         </button>
       </div>
