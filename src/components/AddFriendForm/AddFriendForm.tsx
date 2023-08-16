@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import closeIcon from "../../../public/images/icons/close-icon.svg";
 import imagePreview from "../../../public/images/image-preview.svg";
 interface AddFriendForm {
@@ -31,7 +32,7 @@ const AddFriendForm = ({
   const handleOnRandomPortrait = (): void => {
     setNewFriend({
       ...newFriend,
-      image: `https://i.pravatar.cc/150?u=a0425https://i.pravatar.cc/146?u=${crypto.randomUUID()}`,
+      image: `https://i.pravatar.cc/150?u=a0425https://i.pravatar.cc/146?u=${uuidv4()}`,
     });
   };
 
@@ -43,7 +44,7 @@ const AddFriendForm = ({
       onSubmit={handleOnSubmit}
     >
       <div className="flex flex-col gap-[25px]">
-        <button onClick={() => onAddFriendForm(false)}>
+        <button type="button" onClick={() => onAddFriendForm(false)}>
           <img
             src={closeIcon}
             alt="close icon"
