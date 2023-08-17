@@ -1,7 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import AddFriendForm from "./AddFriendForm";
+import renderWithProviders from "../../utils/testUtils";
 
 describe("Given an AddFriendForm component", () => {
   describe("When it is rendered", () => {
@@ -9,7 +10,7 @@ describe("Given an AddFriendForm component", () => {
       const expectedText = /name/i;
       const onAddFriendForm = vi.fn();
 
-      render(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
+      renderWithProviders(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
       const field = screen.getByLabelText(expectedText);
 
       expect(field).toBeInTheDocument();
@@ -19,7 +20,7 @@ describe("Given an AddFriendForm component", () => {
       const expectedText = /image/i;
       const onAddFriendForm = vi.fn();
 
-      render(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
+      renderWithProviders(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
       const field = screen.getByLabelText(expectedText);
 
       expect(field).toBeInTheDocument();
@@ -29,7 +30,7 @@ describe("Given an AddFriendForm component", () => {
       const expectedText = /generate random avatar/i;
       const onAddFriendForm = vi.fn();
 
-      render(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
+      renderWithProviders(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
       const button = screen.getByRole("button", { name: expectedText });
 
       expect(button).toBeInTheDocument();
@@ -39,7 +40,7 @@ describe("Given an AddFriendForm component", () => {
       const expectedText = /Add/i;
       const onAddFriendForm = vi.fn();
 
-      render(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
+      renderWithProviders(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
       const button = screen.getByRole("button", { name: expectedText });
 
       expect(button).toBeInTheDocument();
@@ -49,7 +50,7 @@ describe("Given an AddFriendForm component", () => {
       const expectedText = /close icon/i;
       const onAddFriendForm = vi.fn();
 
-      render(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
+      renderWithProviders(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
       const icon = screen.getByAltText(expectedText);
 
       expect(icon).toBeInTheDocument();
@@ -63,7 +64,7 @@ describe("Given an AddFriendForm component", () => {
       const expectedRandomWord = /pravatar/i;
       const onAddFriendForm = vi.fn();
 
-      render(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
+      renderWithProviders(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
 
       const button = screen.getByRole("button", { name: buttonText });
       await userEvent.click(button);
@@ -83,7 +84,7 @@ describe("Given an AddFriendForm component", () => {
       const nameText = "Juan";
       const onAddFriendForm = vi.fn();
 
-      render(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
+      renderWithProviders(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
 
       const nameField = screen.getByLabelText(inputNameLabelText);
       await userEvent.type(nameField, nameText);
@@ -101,7 +102,7 @@ describe("Given an AddFriendForm component", () => {
       const nameText = "Juan";
       const onAddFriendForm = vi.fn();
 
-      render(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
+      renderWithProviders(<AddFriendForm onAddFriendForm={onAddFriendForm} />);
 
       const imageField = screen.getByLabelText(inputImageLabelText);
       const nameField = screen.getByLabelText(inputNameLabelText);

@@ -3,11 +3,12 @@ import logo from "/images/splitify-logo.svg";
 import addIcon from "/images/icons/people-add.svg";
 import Operation from "../Operation/Operation";
 import ContactList from "../ContactList/ContactList";
-import { initialContacts } from "../../data/contacts";
 import AddFriendForm from "../AddFriendForm/AddFriendForm";
 import SplitForm from "../SplitForm/SplitForm";
+import { useAppSelector } from "../../store";
 
 const App = (): React.ReactElement => {
+  const { friends } = useAppSelector((state) => state.contactStore);
   const [isAddFriendFormOpen, setIsAddOpen] = useState(false);
   const [isSplitFormOpen, setIsSplitOpen] = useState(false);
 
@@ -34,10 +35,7 @@ const App = (): React.ReactElement => {
       bg-gradient-to-b from-white to-orange-200 "
       >
         <Operation />
-        <ContactList
-          contactList={initialContacts}
-          onSelect={handleOnIsSplitOpen}
-        />
+        <ContactList contactList={friends} onSelect={handleOnIsSplitOpen} />
         {isAddFriendFormOpen && (
           <AddFriendForm onAddFriendForm={setIsAddOpen} />
         )}

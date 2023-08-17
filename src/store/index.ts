@@ -2,9 +2,10 @@ import { PreloadedState } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { contactReducer } from "./contact/contactSlice";
 
 const rootReducer = combineReducers({
-  // insert the slices reducers
+  contactStore: contactReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

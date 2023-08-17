@@ -4,3 +4,8 @@ export interface ContactData {
   image: string;
   balance: number;
 }
+
+export interface ContactStateStructure {
+  friends: ContactData[];
+  friend: ContactData;
+}
