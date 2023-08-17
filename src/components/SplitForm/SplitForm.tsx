@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import dollarIcon from "/images/icons/coin.svg";
 import userIcon from "/images/icons/user.svg";
 import usersIcon from "/images/icons/users.svg";
@@ -12,6 +12,25 @@ interface SplitFormProps {
 const SplitForm = ({
   onCloseSplitForm,
 }: SplitFormProps): React.ReactElement => {
+  const initialForm = {
+    bill: "",
+    expense: "",
+    whoPay: "you",
+  };
+  const [splitForm, setSplitForm] = useState(initialForm);
+  const paidByFriend = splitForm.bill
+    ? (Number(splitForm.bill) - Number(splitForm.expense)).toString()
+    : "";
+
+  const handleOnChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ): void => {
+    setSplitForm({
+      ...splitForm,
+      [event.target.id]: event.target.value,
+    });
+  };
+
   return (
     <div
       className="w-full h-screen flex flex-col items-center justify-start gap-[15px] bg-black bg-opacity-90 
@@ -42,8 +61,10 @@ const SplitForm = ({
           </div>
           <input
             id="bill"
-            type="text"
+            type="number"
             className="w-[140px] h-12 bg-[#fffbe5] border border-[#F8D783] rounded-[10px] px-3"
+            value={splitForm.bill}
+            onChange={handleOnChange}
           />
         </div>
         <div className="w-full flex justify-between items-center">
@@ -61,8 +82,10 @@ const SplitForm = ({
           </div>
           <input
             id="expense"
-            type="text"
+            type="number"
             className="w-[140px] h-12 bg-[#fffbe5] border border-[#F8D783] rounded-[10px] px-3"
+            value={splitForm.expense}
+            onChange={handleOnChange}
           />
         </div>
         <div className="w-full flex justify-between items-center">
@@ -74,14 +97,16 @@ const SplitForm = ({
               alt="users icon"
               className="mr-[14px]"
             />
-            <label htmlFor="friend-expense" className="font-bold">
+            <label htmlFor="friendExpense" className="font-bold">
               Friend&apos;s expense:
             </label>
           </div>
           <input
-            id="friend-expense"
+            id="friendExpense"
             type="text"
-            className="w-[140px] h-12 bg-[#fffbe5] border border-[#F8D783] rounded-[10px] px-3"
+            className="w-[140px] h-12 bg-[#f8f2d1] border border-[#F8D783] rounded-[10px] px-3"
+            value={paidByFriend}
+            readOnly
           />
         </div>
         <div className="w-full flex justify-between items-center">
@@ -93,16 +118,18 @@ const SplitForm = ({
               alt="mood icon"
               className="mr-[14px]"
             />
-            <label htmlFor="who-pay" className="font-bold">
-              Friend&apos;s expense:
+            <label htmlFor="whoPay" className="font-bold">
+              Who is paying the bill?:
             </label>
           </div>
           <select
-            id="who-pay"
+            id="whoPay"
             className="w-[140px] h-12 bg-[#fffbe5] border border-[#F8D783] rounded-[10px] px-3"
+            value={splitForm.whoPay}
+            onChange={handleOnChange}
           >
-            <option value="">You</option>
-            <option value="">Friend</option>
+            <option value="you">You</option>
+            <option value="friend">Friend</option>
           </select>
         </div>
         <div className="flex justify-between w-full  pt-[22px]">
