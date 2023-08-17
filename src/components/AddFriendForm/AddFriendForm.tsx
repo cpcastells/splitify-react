@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import closeIcon from "../../../public/images/icons/close-icon.svg";
-import imagePreview from "../../../public/images/image-preview.svg";
+import closeIcon from "/images/icons/close-icon.svg";
+import imagePreview from "/images/image-preview.svg";
 interface AddFriendForm {
   onAddFriendForm: (value: boolean) => void;
 }
@@ -56,7 +56,7 @@ const AddFriendForm = ({
         {!newFriend.image && (
           <div
             className={`w-[146px] h-[146px] bg-[#fbE3c7] self-center rounded-full 
-          bg-[url("../../../public/images/icons/who-icon.svg")] bg-no-repeat bg-center bg-fit `}
+          bg-[url("/images/icons/who-icon.svg")] bg-no-repeat bg-center bg-fit `}
           ></div>
         )}
         {newFriend.image && (

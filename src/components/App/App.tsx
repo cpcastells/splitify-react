@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import logo from "../../../public/images/splitify-logo.svg";
+import logo from "/images/splitify-logo.svg";
+import addIcon from "/images/icons/people-add.svg";
 import Operation from "../Operation/Operation";
 import ContactList from "../ContactList/ContactList";
 import { initialContacts } from "../../data/contacts";
 import AddFriendForm from "../AddFriendForm/AddFriendForm";
-import addIcon from "../../../public/images/icons/people-add.svg";
 
 const App = (): React.ReactElement => {
   const [isAddFriendFormOpen, setIsAddOpen] = useState(false);
@@ -22,7 +22,10 @@ const App = (): React.ReactElement => {
         alt="Splitify logo"
         className="m-auto"
       />
-      <div className="h-screen bg-gradient-to-b from-white to-orange-200 flex flex-col justify-start items-center gap-5 px-5 pb-9">
+      <div
+        className="min-h-screen flex flex-col justify-start items-center gap-5 px-5 pb-9 
+      bg-gradient-to-b from-white to-orange-200 "
+      >
         <Operation />
         <ContactList contactList={initialContacts} />
         {isAddFriendFormOpen && (
