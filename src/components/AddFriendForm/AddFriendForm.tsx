@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import closeIcon from "/images/icons/close-icon.svg";
 import imagePreview from "/images/image-preview.svg";
+import { useAppDispatch } from "../../store";
+import { addContactActionCreator } from "../../store/contact/contactSlice";
 interface AddFriendForm {
   onAddFriendForm: (value: boolean) => void;
 }
@@ -9,10 +11,12 @@ interface AddFriendForm {
 const AddFriendForm = ({
   onAddFriendForm,
 }: AddFriendForm): React.ReactElement => {
+  const dispatch = useAppDispatch();
   const initialFriend = {
     image: "",
     name: "",
     balance: 0,
+    id: "",
   };
 
   const [newFriend, setNewFriend] = useState(initialFriend);
@@ -26,6 +30,7 @@ const AddFriendForm = ({
 
   const handleOnSubmit = (event: React.ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    dispatch(addContactActionCreator({ ...newFriend, id: uuidv4() }));
     setNewFriend(initialFriend);
   };
 
