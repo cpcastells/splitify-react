@@ -4,13 +4,16 @@ import userIcon from "/images/icons/user.svg";
 import usersIcon from "/images/icons/users.svg";
 import moodIcon from "/images/icons/mood-dollar.svg";
 import splitIcon from "/images/icons/split.svg";
+import { ContactData } from "../../types";
 
 interface SplitFormProps {
   onCloseSplitForm: (value: boolean) => void;
+  contact: ContactData;
 }
 
 const SplitForm = ({
   onCloseSplitForm,
+  contact: { image, name },
 }: SplitFormProps): React.ReactElement => {
   const initialForm = {
     bill: "",
@@ -39,12 +42,12 @@ const SplitForm = ({
       <p className="text-xl text-white font-bold">Split a bill with</p>
       <img
         className="self-center rounded-full"
-        alt="portrait of XXX"
+        alt={`Portrait of ${name}`}
         width={146}
         height={146}
-        src="https://i.pravatar.cc/300"
+        src={image}
       />
-      <h2 className="text-[32px] text-white font-bold uppercase">jimmy</h2>
+      <h2 className="text-[32px] text-white font-bold uppercase">{name}</h2>
       <form className="w-full flex flex-col items-center gap-3 bg-[#ffe3c2] rounded-[10px] px-[14px] py-[35px]">
         <div className="w-full flex justify-between items-center">
           <div className="flex items-center">

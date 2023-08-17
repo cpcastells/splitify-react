@@ -8,7 +8,7 @@ import SplitForm from "../SplitForm/SplitForm";
 import { useAppSelector } from "../../store";
 
 const App = (): React.ReactElement => {
-  const { friends } = useAppSelector((state) => state.contactStore);
+  const { friends, friend } = useAppSelector((state) => state.contactStore);
   const [isAddFriendFormOpen, setIsAddOpen] = useState(false);
   const [isSplitFormOpen, setIsSplitOpen] = useState(false);
 
@@ -22,7 +22,9 @@ const App = (): React.ReactElement => {
 
   return (
     <>
-      {isSplitFormOpen && <SplitForm onCloseSplitForm={setIsSplitOpen} />}
+      {isSplitFormOpen && (
+        <SplitForm onCloseSplitForm={setIsSplitOpen} contact={friend} />
+      )}
       <img
         src={logo}
         width={375}
