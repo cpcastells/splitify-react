@@ -12,11 +12,11 @@ const App = (): React.ReactElement => {
   const [isAddFriendFormOpen, setIsAddOpen] = useState(false);
   const [isSplitFormOpen, setIsSplitOpen] = useState(false);
 
-  const handleOnIsAddOpen = (): void => {
+  const handleOnIsAddFormOpen = (): void => {
     setIsAddOpen(!isAddFriendFormOpen);
   };
 
-  const handleOnIsSplitOpen = (): void => {
+  const handleOnIsSplitFormOpen = (): void => {
     setIsSplitOpen(!isSplitFormOpen);
   };
 
@@ -35,13 +35,13 @@ const App = (): React.ReactElement => {
       bg-gradient-to-b from-white to-orange-200 "
       >
         <Operation />
-        <ContactList contactList={friends} onSelect={handleOnIsSplitOpen} />
+        <ContactList contactList={friends} onSelect={handleOnIsSplitFormOpen} />
         {isAddFriendFormOpen && (
           <AddFriendForm onAddFriendForm={setIsAddOpen} />
         )}
         {!isAddFriendFormOpen && (
           <button
-            onClick={handleOnIsAddOpen}
+            onClick={handleOnIsAddFormOpen}
             className="flex items-center justify-center gap-3 w-full h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a]
              font-bold text-white rounded-[10px] shadow-md capitalize transition-all duration-150 ease-in-out"
           >
