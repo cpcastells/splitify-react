@@ -20,8 +20,18 @@ const contactSlice = createSlice({
       ...currentContactState,
       friends: [...currentContactState.friends, action.payload],
     }),
+    selectContact: (
+      currentContactState,
+      action: PayloadAction<ContactData>
+    ) => ({
+      ...currentContactState,
+      friend: action.payload,
+    }),
   },
 });
 
-export const { addContact: addContactActionCreator } = contactSlice.actions;
+export const {
+  addContact: addContactActionCreator,
+  selectContact: selectContactActionCreator,
+} = contactSlice.actions;
 export const contactReducer = contactSlice.reducer;
