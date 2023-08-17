@@ -9,14 +9,19 @@ import SplitForm from "../SplitForm/SplitForm";
 
 const App = (): React.ReactElement => {
   const [isAddFriendFormOpen, setIsAddOpen] = useState(false);
+  const [isSplitFormOpen, setIsSplitOpen] = useState(false);
 
   const handleOnIsAddOpen = (): void => {
     setIsAddOpen(!isAddFriendFormOpen);
   };
 
+  const handleOnIsSplitOpen = (): void => {
+    setIsSplitOpen(!isSplitFormOpen);
+  };
+
   return (
     <>
-      <SplitForm />
+      {isSplitFormOpen && <SplitForm onCloseSplitForm={setIsSplitOpen} />}
       <img
         src={logo}
         width={375}
@@ -29,7 +34,10 @@ const App = (): React.ReactElement => {
       bg-gradient-to-b from-white to-orange-200 "
       >
         <Operation />
-        <ContactList contactList={initialContacts} />
+        <ContactList
+          contactList={initialContacts}
+          onSelect={handleOnIsSplitOpen}
+        />
         {isAddFriendFormOpen && (
           <AddFriendForm onAddFriendForm={setIsAddOpen} />
         )}

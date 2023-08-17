@@ -3,10 +3,12 @@ import { ContactData } from "../../types";
 
 interface ContactProps {
   contact: ContactData;
+  onSelect: () => void;
 }
 
 const Contact = ({
   contact: { name, image, balance },
+  onSelect,
 }: ContactProps): React.ReactElement => {
   return (
     <article
@@ -39,7 +41,10 @@ const Contact = ({
           </p>
         )}
 
-        <button className="w-[72px] h-[41px] bg-[#f8a23d] hover:bg-[#ffc64a] font-bold text-white rounded-[10px] shadow-md">
+        <button
+          className="w-[72px] h-[41px] bg-[#f8a23d] hover:bg-[#ffc64a] font-bold text-white rounded-[10px] shadow-md"
+          onClick={onSelect}
+        >
           Select
         </button>
       </div>

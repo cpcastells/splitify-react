@@ -5,11 +5,17 @@ import usersIcon from "/images/icons/users.svg";
 import moodIcon from "/images/icons/mood-dollar.svg";
 import splitIcon from "/images/icons/split.svg";
 
-const SplitForm = (): React.ReactElement => {
+interface SplitFormProps {
+  onCloseSplitForm: (value: boolean) => void;
+}
+
+const SplitForm = ({
+  onCloseSplitForm,
+}: SplitFormProps): React.ReactElement => {
   return (
     <div
       className="w-full h-screen flex flex-col items-center justify-start gap-[15px] bg-black bg-opacity-90 
-    backdrop-blur-5 fixed px-5 pt-[60px]"
+    backdrop-blur-5 fixed px-5 pt-[60px] z-10"
     >
       <p className="text-xl text-white font-bold">Split a bill with</p>
       <img
@@ -103,6 +109,7 @@ const SplitForm = (): React.ReactElement => {
           <button
             className="flex items-center justify-center w-[140px] h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a]
              font-bold rounded-[10px] shadow-md capitalize transition-all duration-150 ease-in-out"
+            onClick={() => onCloseSplitForm(false)}
           >
             close
           </button>
