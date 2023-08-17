@@ -5,6 +5,7 @@ import Operation from "../Operation/Operation";
 import ContactList from "../ContactList/ContactList";
 import { initialContacts } from "../../data/contacts";
 import AddFriendForm from "../AddFriendForm/AddFriendForm";
+import SplitForm from "../SplitForm/SplitForm";
 
 const App = (): React.ReactElement => {
   const [isAddFriendFormOpen, setIsAddOpen] = useState(false);
@@ -15,6 +16,7 @@ const App = (): React.ReactElement => {
 
   return (
     <>
+      <SplitForm />
       <img
         src={logo}
         width={375}
@@ -34,7 +36,7 @@ const App = (): React.ReactElement => {
         {!isAddFriendFormOpen && (
           <button
             onClick={handleOnIsAddOpen}
-            className="flex items-center  justify-center gap-3 w-full h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a]
+            className="flex items-center justify-center gap-3 w-full h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a]
              font-bold text-white rounded-[10px] shadow-md capitalize transition-all duration-150 ease-in-out"
           >
             <img src={addIcon} width={40} height={40} alt="add icon" />
