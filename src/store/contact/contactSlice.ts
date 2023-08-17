@@ -27,11 +27,24 @@ const contactSlice = createSlice({
       ...currentContactState,
       friend: action.payload,
     }),
+    updateContact: (
+      currentContactState,
+      action: PayloadAction<ContactData>
+    ) => ({
+      ...currentContactState,
+      friends: currentContactState.friends.map((contact) => {
+        if (action.payload.id === contact.id) {
+          return { ...contact, balance: action.payload.balance };
+        }
+        return contact;
+      }),
+    }),
   },
 });
 
 export const {
   addContact: addContactActionCreator,
   selectContact: selectContactActionCreator,
+  updateContact: updateContactActionCreator,
 } = contactSlice.actions;
 export const contactReducer = contactSlice.reducer;

@@ -4,13 +4,18 @@ import userIcon from "/images/icons/user.svg";
 import usersIcon from "/images/icons/users.svg";
 import moodIcon from "/images/icons/mood-dollar.svg";
 import splitIcon from "/images/icons/split.svg";
+import { ContactData } from "../../types";
+import { updateContactActionCreator } from "../../store/contact/contactSlice";
+import { useAppDispatch } from "../../store";
 
 interface SplitFormProps {
   onCloseSplitForm: (value: boolean) => void;
+  contact: ContactData;
 }
 
 const SplitForm = ({
   onCloseSplitForm,
+  contact,
 }: SplitFormProps): React.ReactElement => {
   const initialForm = {
     bill: "",
@@ -18,9 +23,13 @@ const SplitForm = ({
     whoPay: "you",
   };
   const [splitForm, setSplitForm] = useState(initialForm);
-  const paidByFriend = splitForm.bill
+  const dispatch = useAppDispatch();
+  const friendExpense = splitForm.bill
     ? (Number(splitForm.bill) - Number(splitForm.expense)).toString()
     : "";
+  let newBalance: number;
+
+  const isDisabled = !splitForm.bill || !splitForm.expense;
 
   const handleOnChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -31,6 +40,19 @@ const SplitForm = ({
     });
   };
 
+  const handleOnSplit = (event: React.ChangeEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+
+    if (splitForm.whoPay === "you") {
+      newBalance = contact.balance + Number(friendExpense);
+    } else if (splitForm.whoPay === "friend") {
+      newBalance = contact.balance - Number(friendExpense);
+    }
+
+    dispatch(updateContactActionCreator({ ...contact, balance: newBalance }));
+    onCloseSplitForm(false);
+  };
+
   return (
     <div
       className="w-full h-screen flex flex-col items-center justify-start gap-[15px] bg-black bg-opacity-90 
@@ -39,13 +61,18 @@ const SplitForm = ({
       <p className="text-xl text-white font-bold">Split a bill with</p>
       <img
         className="self-center rounded-full"
-        alt="portrait of XXX"
+        alt={`Portrait of ${name}`}
         width={146}
         height={146}
-        src="https://i.pravatar.cc/300"
+        src={contact.image}
       />
-      <h2 className="text-[32px] text-white font-bold uppercase">jimmy</h2>
-      <form className="w-full flex flex-col items-center gap-3 bg-[#ffe3c2] rounded-[10px] px-[14px] py-[35px]">
+      <h2 className="text-[32px] text-white font-bold uppercase">
+        {contact.name}
+      </h2>
+      <form
+        onSubmit={handleOnSplit}
+        className="w-full flex flex-col items-center gap-3 bg-[#ffe3c2] rounded-[10px] px-[14px] py-[35px]"
+      >
         <div className="w-full flex justify-between items-center">
           <div className="flex items-center">
             <img
@@ -105,7 +132,7 @@ const SplitForm = ({
             id="friendExpense"
             type="text"
             className="w-[140px] h-12 bg-[#f8f2d1] border border-[#F8D783] rounded-[10px] px-3"
-            value={paidByFriend}
+            value={friendExpense}
             readOnly
           />
         </div>
@@ -129,11 +156,12 @@ const SplitForm = ({
             onChange={handleOnChange}
           >
             <option value="you">You</option>
-            <option value="friend">Friend</option>
+            <option value="friend">{contact.name}</option>
           </select>
         </div>
         <div className="flex justify-between w-full  pt-[22px]">
           <button
+            type="button"
             className="flex items-center justify-center w-[140px] h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a]
              font-bold rounded-[10px] shadow-md capitalize transition-all duration-150 ease-in-out"
             onClick={() => onCloseSplitForm(false)}
@@ -142,7 +170,8 @@ const SplitForm = ({
           </button>
           <button
             className="flex items-center justify-center gap-2 w-[140px] h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a]
-             font-bold rounded-[10px] shadow-md capitalize transition-all duration-150 ease-in-out"
+             font-bold rounded-[10px] shadow-md capitalize transition-all duration-150 ease-in-out disabled:bg-[#fcc990]"
+            disabled={isDisabled}
           >
             <img src={splitIcon} width={29} height={31} alt="add icon" />
             split bill
