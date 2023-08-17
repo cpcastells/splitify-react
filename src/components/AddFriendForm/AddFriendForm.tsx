@@ -62,7 +62,7 @@ const AddFriendForm = ({
         {newFriend.image && (
           <img
             className="self-center rounded-full"
-            alt="portrait"
+            alt="avatar"
             width={146}
             height={146}
             src={newFriend.image}
