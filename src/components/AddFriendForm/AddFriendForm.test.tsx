@@ -4,6 +4,14 @@ import { vi } from "vitest";
 import AddFriendForm from "./AddFriendForm";
 import renderWithProviders from "../../utils/testUtils";
 
+vi.mock("../../hooks/useUi", () => {
+  return {
+    default: () => ({
+      scrolltoElement: vi.fn(),
+    }),
+  };
+});
+
 describe("Given an AddFriendForm component", () => {
   describe("When it is rendered", () => {
     test("Then it should show a name input", () => {
