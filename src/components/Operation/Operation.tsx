@@ -33,7 +33,7 @@ const Operation = (): React.ReactElement => {
         </div>
       </div>
       <div className="flex flex-col justify-between items-center flex-grow-[1] bg-[#F9F4EE] rounded-[10px] p-[14px] shadow-md">
-        <span className="text-xs">Total</span>
+        <span className="text-sm">Total</span>
         <span className="text-xl">{moneyPeopleOwe + moneyIowe} €</span>
       </div>
     </div>

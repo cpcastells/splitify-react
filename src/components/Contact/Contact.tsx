@@ -48,7 +48,7 @@ const Contact = ({ contact, onSelect }: ContactProps): React.ReactElement => {
         )}
 
         <button
-          className="w-[72px] h-[41px] bg-[#f8a23d] hover:bg-[#ffc64a] font-bold text-white rounded-[10px] shadow-md"
+          className="w-[72px] h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a] font-bold text-white rounded-[10px] shadow-md"
           onClick={handleOnSelect}
         >
           Select
