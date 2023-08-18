@@ -6,6 +6,10 @@
   img {
     height: min-content;
   }
+
+  html {
+    background: linear-gradient(180deg, #fff 0%, #fed9ae 100%);
+  }
 }
 
 @tailwind components;

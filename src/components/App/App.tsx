@@ -32,10 +32,7 @@ const App = (): React.ReactElement => {
         alt="Splitify logo"
         className="m-auto"
       />
-      <div
-        className="min-h-screen flex flex-col justify-start items-center gap-5 px-5 pb-9 
-      bg-gradient-to-b from-white to-orange-200 "
-      >
+      <div className="min-h-screen flex flex-col justify-start items-center gap-5 px-5 pb-9">
         <Operation />
         <ContactList contactList={friends} onSelect={handleOnIsSplitFormOpen} />
         {isAddFriendFormOpen && (
