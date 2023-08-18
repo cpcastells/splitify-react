@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import closeIcon from "/images/icons/close-icon.svg";
 import imagePreview from "/images/image-preview.svg";
 import { useAppDispatch } from "../../store";
 import { addContactActionCreator } from "../../store/contact/contactSlice";
+import useUi from "../../hooks/useUi";
 interface AddFriendForm {
   onAddFriendForm: (value: boolean) => void;
 }
@@ -20,6 +21,12 @@ const AddFriendForm = ({
   };
 
   const [newFriend, setNewFriend] = useState(initialFriend);
+  const { scrolltoElement } = useUi();
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  useEffect(() => {
+    scrolltoElement(formRef);
+  }, [scrolltoElement]);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewFriend((prevFriend) => ({
@@ -32,6 +39,7 @@ const AddFriendForm = ({
     event.preventDefault();
     dispatch(addContactActionCreator({ ...newFriend, id: uuidv4() }));
     setNewFriend(initialFriend);
+    onAddFriendForm(false);
   };
 
   const handleOnRandomPortrait = (): void => {
@@ -47,6 +55,7 @@ const AddFriendForm = ({
     <form
       className="relative w-full p-[14px] bg-[#ffffffbe] rounded-[10px]"
       onSubmit={handleOnSubmit}
+      ref={formRef}
     >
       <div className="flex flex-col gap-[25px]">
         <button type="button" onClick={() => onAddFriendForm(false)}>
