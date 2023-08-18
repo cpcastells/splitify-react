@@ -25,29 +25,34 @@ const App = (): React.ReactElement => {
       {isSplitFormOpen && (
         <SplitForm onCloseSplitForm={setIsSplitOpen} contact={friend} />
       )}
-      <img
-        src={logo}
-        width={375}
-        height={197}
-        alt="Splitify logo"
-        className="m-auto"
-      />
-      <div className="min-h-screen flex flex-col justify-start items-center gap-5 px-5 pb-9">
-        <Operation />
-        <ContactList contactList={friends} onSelect={handleOnIsSplitFormOpen} />
-        {isAddFriendFormOpen && (
-          <AddFriendForm onAddFriendForm={setIsAddOpen} />
-        )}
-        {!isAddFriendFormOpen && (
-          <button
-            onClick={handleOnIsAddFormOpen}
-            className="flex items-center justify-center gap-3 w-full h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a]
+      <div className="w-full max-w-lg m-auto">
+        <img
+          src={logo}
+          width={375}
+          height={197}
+          alt="Splitify logo"
+          className="m-auto"
+        />
+        <div className="min-h-screen flex flex-col justify-start items-center gap-5 px-5 pb-9">
+          <Operation />
+          <ContactList
+            contactList={friends}
+            onSelect={handleOnIsSplitFormOpen}
+          />
+          {isAddFriendFormOpen && (
+            <AddFriendForm onAddFriendForm={setIsAddOpen} />
+          )}
+          {!isAddFriendFormOpen && (
+            <button
+              onClick={handleOnIsAddFormOpen}
+              className="flex items-center justify-center gap-3 w-full h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a]
              font-bold text-white rounded-[10px] shadow-md capitalize transition-all duration-150 ease-in-out"
-          >
-            <img src={addIcon} width={40} height={40} alt="add icon" />
-            Add friend
-          </button>
-        )}
+            >
+              <img src={addIcon} width={40} height={40} alt="add icon" />
+              Add friend
+            </button>
+          )}
+        </div>
       </div>
     </>
   );

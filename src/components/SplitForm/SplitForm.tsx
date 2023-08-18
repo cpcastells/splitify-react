@@ -71,7 +71,7 @@ const SplitForm = ({
       </h2>
       <form
         onSubmit={handleOnSplit}
-        className="w-full flex flex-col items-center gap-3 bg-[#ffe3c2] rounded-[10px] px-[14px] py-[35px]"
+        className="max-w-md flex flex-col items-center gap-3 bg-[#ffe3c2] rounded-[10px] px-[14px] py-[35px]"
       >
         <div className="w-full flex justify-between items-center">
           <div className="flex items-center">
@@ -115,7 +115,7 @@ const SplitForm = ({
             onChange={handleOnChange}
           />
         </div>
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between gap-2 items-center">
           <div className="flex items-center">
             <img
               src={usersIcon}
@@ -136,7 +136,7 @@ const SplitForm = ({
             readOnly
           />
         </div>
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between gap-2 items-center">
           <div className="flex items-center">
             <img
               src={moodIcon}
@@ -145,8 +145,8 @@ const SplitForm = ({
               alt="mood icon"
               className="mr-[14px]"
             />
-            <label htmlFor="whoPay" className="font-bold">
-              Who is paying the bill?:
+            <label htmlFor="whoPay" className="font-bold flex-wrap">
+              Who is paying?:
             </label>
           </div>
           <select
@@ -159,7 +159,7 @@ const SplitForm = ({
             <option value="friend">{contact.name}</option>
           </select>
         </div>
-        <div className="flex justify-between w-full  pt-[22px]">
+        <div className="flex justify-between w-full pt-[22px]">
           <button
             type="button"
             className="flex items-center justify-center w-[140px] h-[48px] bg-[#f8a23d] hover:bg-[#ffc64a]
